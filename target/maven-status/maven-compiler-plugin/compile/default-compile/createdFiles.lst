@@ -1,0 +1,5 @@
+com\jacklin\MusiclibApplication.class
+com\jacklin\Song.class
+com\jacklin\SongRepository.class
+com\jacklin\Person.class
+com\jacklin\PersonRepository.class
