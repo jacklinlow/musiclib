@@ -70,7 +70,6 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', function ($sco
 myApp.controller('testController', function ($scope, $http, SpringDataRestAdapter) {
 
     var httpPromise = $http.get('http://localhost:9000/song');
-
     SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
         $scope.song = processedResponse._embeddedItems;
     });

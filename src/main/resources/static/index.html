@@ -70,16 +70,34 @@
 
                 
                 <br>
-                
-                Title: <input type="text" ng-model="title" />
-                <br>
-                Artist: <input type="text" ng-model="artist" />
-                <br>
-                BPM: <input type="text" ng-model="bpm" />
-                <br>
-                Key: <input type="text" ng-model="key" />
-                
-                <a href="#" class="btn btn-default" ng-click="addSong()">Add</a>
+                <form>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text"  ng-model="title" class="form-control" id="title" placeholder="Song title">
+                    </div>
+                    <div class="form-group">
+                        <label for="artist">Artist</label>
+                        <input type="text"  ng-model="artist" class="form-control" id="artist" placeholder="Artist">
+                    </div>
+                    <div class="form-group">
+                        <label for="bpm">BPM</label>
+                        <input type="text"  ng-model="bpm" class="form-control" id="bpm" placeholder="Beats per minute">
+                    </div>
+                    <div class="form-group">
+                        <label for="key">Key</label>
+                        <input type="text"  ng-model="key" class="form-control" id="key" placeholder="Key">
+                    </div>
+                    <button type ="submit" class="btn btn-default" ng-click="addSong()">Add song</button>
+                </form>
+                <!--Title: <input type="text" ng-model="title" />-->
+                <!--<br>-->
+                <!--Artist: <input type="text" ng-model="artist" />-->
+                <!--<br>-->
+                <!--BPM: <input type="text" ng-model="bpm" />-->
+                <!--<br>-->
+                <!--Key: <input type="text" ng-model="key" />-->
+                <!--<a href="#" class="btn btn-default" ng-click="addSong()">Add song</a>-->
+
 
                 <!--<div>-->
 
@@ -102,16 +120,34 @@
                 
             </div>
 
+            <div align="center">
+                <br>
+                <img src="images/camelot_wheel.jpg" class="img-responsive" width="500" height="500"  alt="Camelot Wheel"/>
+                <br>
+            </div>
+
             <div ng-controller="testController">
-                <h3>Test</h3>
-                <ul>
-                    <li ng-repeat="x in song">
-                        <td>{{ x.title }}</td>
-                        <td>{{ x.artist }}</td>
-                        <td>{{ x.bpm }}</td>
-                        <td>{{ x.key }}</td>
-                    </li>
-                </ul>
+                <h3>Songs</h3>
+                <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Artist</th>
+                            <th>BPM</th>
+                            <th>Key</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in song">
+                            <td>{{ x.title }}</td>
+                            <td>{{ x.artist }}</td>
+                            <td>{{ x.bpm }}</td>
+                            <td>{{ x.key }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
             </div>
             
 		</div>
