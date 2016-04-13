@@ -1,5 +1,4 @@
-var myApp = angular.module('myApp', []);
-//["ngResource", "spring-data-rest"]);
+var myApp = angular.module('myApp', ['ngResource', 'spring-data-rest']);
 
 myApp.config(function($httpProvider) {
   $httpProvider.defaults.useXDomain = true;
@@ -15,12 +14,6 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', function ($sco
     };
 
     $scope.characters = 5;
-
-//    var httpPromise = $http.get('http://localhost:9000/people');
-//
-//    SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
-//        $scope.person = processedResponse._embeddedItems;
-//    });
 
     $http.get('http://localhost:9000/people/57093c6362b545f3835accaa')
         .success(function (result) {
@@ -72,4 +65,16 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', function ($sco
     
     
     
-}]);
+}])
+
+myApp.controller('testController', function ($scope, $http, SpringDataRestAdapter) {
+
+    var httpPromise = $http.get('http://localhost:9000/song');
+
+    SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
+        $scope.song = processedResponse._embeddedItems;
+    });
+
+})
+
+;

@@ -12,5 +12,6 @@ import java.util.List;
 public interface SongRepository extends MongoRepository<Song, String> {
 
 	List<Song> findByArtist(@Param("artist") String artist);
+	List<Song> findByKey(@Param("key") String key);
 
 }
