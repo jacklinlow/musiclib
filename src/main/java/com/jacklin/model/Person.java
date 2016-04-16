@@ -1,4 +1,4 @@
-package com.jacklin;
+package com.jacklin.model;
 
 import org.springframework.data.annotation.Id;
 
