@@ -18,6 +18,11 @@ myApp.config(function ($routeProvider) {
         controller: 'listSongsController'
     })
 
+    .when('/mix', {
+            templateUrl: 'pages/mix.html',
+            controller: 'mixController'
+    })
+
 });
 
 myApp.controller('mainController', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
@@ -29,11 +34,12 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', function ($sco
 myApp.controller('listSongsController', function ($scope, $http, SpringDataRestAdapter) {
 
     $scope.addSong = function () {
-        $http.post('http://localhost:9000/song', { title: $scope.title, artist: $scope.artist, bpm: $scope.bpm, key: $scope.key })
+        $http.post('http://localhost:8080/song', { title: $scope.title, artist: $scope.artist, bpm: $scope.bpm, key: $scope.key })
             .success(function (result) {
 
                 console.log(result);
                 $scope.song = result;
+                $scope.loadSongs();
 
             })
             .error(function (data, status) {
@@ -48,33 +54,62 @@ myApp.controller('listSongsController', function ($scope, $http, SpringDataRestA
             $scope.key = '';
     };
 
-    $scope.addTest = function () {
-            $http.post('http://localhost:9000/song', { title: 'Test1', artist: 'Test2', bpm: '123', key: '3m' })
-                .success(function (result) {
+//    $scope.addTest = function () {
+//            $http.post('http://localhost:8080/song', { title: 'Test1', artist: 'Test2', bpm: '123', key: '3m' })
+//                .success(function (result) {
+//
+//                    console.log(result);
+//                    $scope.song = result;
+//                    $scope.loadSongs();
+//                    console.log('This ran fine!');
+//
+//                })
+//                .error(function (data, status) {
+//
+//                    console.log(data);
+//                    console.log('This failed!');
+//
+//                });
+//
+//    };
 
-                    console.log(result);
-                    $scope.song = result;
-                    console.log('This ran fine!');
+    $scope.loadSongs = function(){
+        var httpPromise = $http.get('http://localhost:8080/song');
+        SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
+            $scope.songs = processedResponse._embeddedItems;
+        });
+    }
 
-                })
-                .error(function (data, status) {
-
-                    console.log(data);
-                    console.log('This failed!');
-
-                });
-
-    };
-
-
-    var httpPromise = $http.get('http://localhost:9000/song');
-    SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
-        $scope.songs = processedResponse._embeddedItems;
-    });
+    $scope.loadSongs();
 
     $scope.setSelected = function() {
             $scope.selected = this.song;
             console.log($scope.selected);
+    };
+
+})
+
+myApp.controller('mixController', function ($scope, $http, SpringDataRestAdapter) {
+
+    $scope.loadSongs = function(){
+        var httpPromise = $http.get('http://localhost:8080/song');
+        SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
+            $scope.songs = processedResponse._embeddedItems;
+        });
+    }
+
+    $scope.loadSongs();
+
+    $scope.selected = '';
+
+    $scope.setSelected = function() {
+            $scope.selected = this.song;
+            console.log($scope.selected.key);
+            var httpPromise = $http.get('http://localhost:8080/song/search/findCompatibleSongsByKey', {
+                                            params: { key: $scope.selected.key } });
+            SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
+            $scope.songs = processedResponse._embeddedItems;
+            });
     };
 
 })
