@@ -34,7 +34,7 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', function ($sco
 myApp.controller('listSongsController', function ($scope, $http, SpringDataRestAdapter) {
 
     $scope.addSong = function () {
-        $http.post('http://localhost:8080/song', { title: $scope.title, artist: $scope.artist, bpm: $scope.bpm, key: $scope.key })
+        $http.post('https://jacklinmusic.herokuapp.com/song', { title: $scope.title, artist: $scope.artist, bpm: $scope.bpm, key: $scope.key })
             .success(function (result) {
 
                 console.log(result);
@@ -74,7 +74,7 @@ myApp.controller('listSongsController', function ($scope, $http, SpringDataRestA
 //    };
 
     $scope.loadSongs = function(){
-        var httpPromise = $http.get('http://localhost:8080/song');
+        var httpPromise = $http.get('https://jacklinmusic.herokuapp.com/song');
         SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
             $scope.songs = processedResponse._embeddedItems;
         });
@@ -92,7 +92,7 @@ myApp.controller('listSongsController', function ($scope, $http, SpringDataRestA
 myApp.controller('mixController', function ($scope, $http, SpringDataRestAdapter) {
 
     $scope.loadSongs = function(){
-        var httpPromise = $http.get('http://localhost:8080/song');
+        var httpPromise = $http.get('https://jacklinmusic.herokuapp.com/song');
         SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
             $scope.songs = processedResponse._embeddedItems;
         });
@@ -105,7 +105,7 @@ myApp.controller('mixController', function ($scope, $http, SpringDataRestAdapter
     $scope.setSelected = function() {
             $scope.selected = this.song;
             console.log($scope.selected.key);
-            var httpPromise = $http.get('http://localhost:8080/song/search/findCompatibleSongsByKey', {
+            var httpPromise = $http.get('https://jacklinmusic.herokuapp.com/song/search/findCompatibleSongsByKey', {
                                             params: { key: $scope.selected.key } });
             SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
             $scope.songs = processedResponse._embeddedItems;
