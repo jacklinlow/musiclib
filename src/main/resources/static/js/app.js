@@ -1,7 +1,7 @@
 var myApp = angular.module('myApp', ['ngResource', 'spring-data-rest', 'ngRoute']);
 var prodUrl = "https://jacklinmusic.herokuapp.com/song";
 var devUrl = "http://localhost:8080/song";
-var currentUrl = devUrl;
+var currentUrl = prodUrl;
 
 myApp.config(function($httpProvider) {
   $httpProvider.defaults.useXDomain = true;
