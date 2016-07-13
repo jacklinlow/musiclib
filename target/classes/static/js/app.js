@@ -1,18 +1,19 @@
 var myApp = angular.module('myApp', ['ngResource', 'spring-data-rest', 'ngRoute']);
-var prodUrl = "https://jacklinmusic.herokuapp.com/song"
-var devUrl = "http://localhost:8080/song"
-var currentUrl = devUrl
+var prodUrl = "https://jacklinmusic.herokuapp.com/song";
+var devUrl = "http://localhost:8080/song";
+var currentUrl = devUrl;
 
 myApp.config(function($httpProvider) {
   $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 
+
 myApp.config(function ($routeProvider) {
     $routeProvider
 
-    .when('/', {
-        templateUrl: 'pages/main.html',
+    .when('/home', {
+        templateUrl: 'pages/home.html',
         controller: 'mainController'
     })
 
@@ -28,11 +29,10 @@ myApp.config(function ($routeProvider) {
 
 });
 
-myApp.controller('mainController', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
+myApp.controller('mainController', function ($scope, $filter, $http) {
 
 
-
-}])
+})
 
 myApp.controller('listSongsController', function ($scope, $http, SpringDataRestAdapter) {
 
@@ -105,14 +105,17 @@ myApp.controller('mixController', function ($scope, $http, SpringDataRestAdapter
 
     $scope.selected = '';
 
+    var playedSongs = [];
+
     $scope.setSelected = function() {
             $scope.selected = this.song;
-            console.log($scope.selected.key);
             var httpPromise = $http.get(currentUrl + '/search/findCompatibleSongsByKey', {
                                             params: { key: $scope.selected.key } });
             SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
             $scope.songs = processedResponse._embeddedItems;
             });
+            playedSongs.push({artist: this.song.artist, title: this.song.title});
+            console.log(playedSongs);
     };
 
 })

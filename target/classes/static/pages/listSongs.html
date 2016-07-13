@@ -1,46 +1,53 @@
-<h3>Add songs to your list</h3>
-<br>
-<form>
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text"  ng-model="title" class="form-control" id="title" placeholder="Song title">
-    </div>
-    <div class="form-group">
-        <label for="artist">Artist</label>
-        <input type="text"  ng-model="artist" class="form-control" id="artist" placeholder="Artist">
-    </div>
-    <div class="form-group">
-        <label for="bpm">BPM</label>
-        <input type="text"  ng-model="bpm" class="form-control" id="bpm" placeholder="Beats per minute">
-    </div>
-    <div class="form-group">
-        <label for="key">Key</label>
-        <input type="text"  ng-model="key" class="form-control" id="key" placeholder="Key">
-    </div>
-    <button type ="submit" class="btn btn-default" ng-click="addSong()">Add song</button>
-    <button type ="submit" class="btn btn-default" ng-click="addTest()">Add test</button>
-</form>
+<div class="add-songs-page">
+    <br>
+    <br>
+    <br>
+    <h2>Add songs to your list</h2>
+    <br>
+    <br>
+    <div class="container">
+    <form>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text"  ng-model="title" class="form-control" id="title" placeholder="Song title">
+        </div>
+        <div class="form-group">
+            <label for="artist">Artist</label>
+            <input type="text"  ng-model="artist" class="form-control" id="artist" placeholder="Artist">
+        </div>
+        <div class="form-group">
+            <label for="bpm">BPM</label>
+            <input type="text" size="3"  ng-model="bpm" class="form-control" id="bpm" placeholder="Beats per minute">
+        </div>
+        <div class="form-group">
+            <label for="key">Key</label>
+            <input type="text" size="3"  ng-model="key" class="form-control" id="key" placeholder="Key">
+        </div>
+        <button type ="submit" class="btn btn-default" ng-click="addSong()">Add song</button>
+    </form>
 
-<br>
-<h3>Songs</h3>
-<br>
-<div class="table-responsive">
-    <table class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>BPM</th>
-            <th>Key</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="song in songs" ng-click="setSelected();">
-            <td>{{ song.title }}</td>
-            <td>{{ song.artist }}</td>
-            <td>{{ song.bpm }}</td>
-            <td>{{ song.key }}</td>
-        </tr>
-        </tbody>
-    </table>
+    <!--<br>-->
+    <!--<h3>Songs</h3>-->
+    <!--<br>-->
+    <!--<div class="table-responsive">-->
+        <!--<table class="table table-bordered table-hover">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Title</th>-->
+                <!--<th>Artist</th>-->
+                <!--<th>BPM</th>-->
+                <!--<th>Key</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr ng-repeat="song in songs" ng-click="setSelected();">-->
+                <!--<td>{{ song.title }}</td>-->
+                <!--<td>{{ song.artist }}</td>-->
+                <!--<td>{{ song.bpm }}</td>-->
+                <!--<td>{{ song.key }}</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</div>-->
+</div>
 </div>
